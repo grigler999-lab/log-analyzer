@@ -1,7 +1,12 @@
 def read_log_file(filename):
-    with open(filename, "r") as file:
-        lines = file.readlines()
-    return lines
+    try:
+        with open(filename, "r") as file:
+            
+            lines = file.readlines()
+            return lines
+    except FileNotFoundError:
+        print(f"Error: The file '{filename}' was not found.")
+        return None
 
 
 def analyze_logs(lines):
@@ -33,6 +38,8 @@ def main():
     filename = "sample.log"
 
     lines = read_log_file(filename)
+    if lines is None:
+        return
     info_count, warning_count, error_count = analyze_logs(lines)
 
     show_summary(info_count, warning_count, error_count)
