@@ -16,6 +16,8 @@ def analyze_logs(lines):
 
     for line in lines:
         line = line.strip()
+        if line == "":
+            continue
 
         if "INFO" in line:
             info_count += 1
@@ -40,6 +42,11 @@ def main():
     lines = read_log_file(filename)
     if lines is None:
         return
+
+    if not lines:
+        print("Log file is empty.")
+        return
+    
     info_count, warning_count, error_count = analyze_logs(lines)
 
     show_summary(info_count, warning_count, error_count)
