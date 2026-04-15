@@ -18,6 +18,7 @@ def analyze_logs(lines):
     error_count = 0
     error_lines = []
     warning_lines = []
+    unknown_lines = []
 
     for line in lines:
         line = line.strip()
@@ -32,15 +33,18 @@ def analyze_logs(lines):
         elif "ERROR" in line:
             error_count += 1
             error_lines.append(line)
+        else:
+            unknown_lines.append(line)
 
-    return info_count, warning_count, error_count, warning_lines, error_lines
+    return info_count, warning_count, error_count, warning_lines, error_lines ,unknown_lines
 
 
-def show_summary(info_count, warning_count, error_count, ):
+def show_summary(info_count, warning_count, error_count, unknown_count):
     print("Log summary:")
     print(f"INFO: {info_count}")
     print(f"WARNING: {warning_count}")
     print(f"ERROR: {error_count}")
+    print(f"UNKNOWN: {unknown_count}")
 
 def show_errors(error_lines):
     print("\nError lines:")
@@ -62,6 +66,15 @@ def show_warnings(warning_lines):
     for line in warning_lines:
         print(line)
 
+def show_unknown(unknown_lines):
+    print("\nUnknown lines:")
+
+    if not unknown_lines:
+        print("No unknown lines found.")
+        return
+
+    for line in unknown_lines:
+        print(line)
 
 def main():
     filename = "sample.log"
@@ -77,11 +90,12 @@ def main():
         return
     
     
-    info_count, warning_count, error_count, warning_lines, error_lines = analyze_logs(lines)
+    info_count, warning_count, error_count, warning_lines, error_lines , unknown_lines = analyze_logs(lines)
 
-    show_summary(info_count, warning_count, error_count, )
+    show_summary(info_count, warning_count, error_count, len(unknown_lines))
     show_warnings(warning_lines)
     show_errors(error_lines)
+    show_unknown(unknown_lines)
 
 
 main()
