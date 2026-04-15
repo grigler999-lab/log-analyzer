@@ -1,15 +1,7 @@
 from copy import error
 
 
-def read_log_file(filename):
-    try:
-        with open(filename, "r") as file:
-            
-            lines = file.readlines()
-            return lines
-    except FileNotFoundError:
-        print(f"Error: The file '{filename}' was not found.")
-        return None
+
 
 
 def analyze_logs(lines):
@@ -77,7 +69,12 @@ def show_unknown(unknown_lines):
         print(line)
 
 def main():
-    filename = "sample.log"
+    from file_reader import read_log_file
+    filename = input("Enter the log file name: ").strip()
+    
+    if filename == "":
+        print("Error: No file name was entered.")
+        return
 
     lines = read_log_file(filename)
 
