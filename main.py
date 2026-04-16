@@ -6,24 +6,26 @@ from output import show_summary, show_errors, show_warnings, show_unknown
 
 def main():
     
-    filename = input("Enter the log file name: ").strip()
-    
-    if filename == "":
-        print("Error: No file name was entered.")
-        return
+    while True:
+        filename = input("Enter the log file name: ").strip()
 
-    lines = read_log_file(filename)
+        if filename == "":
+            print("Error: No file name was entered.")
+            continue
 
-    
-    if lines is None:
-        return
+        lines = read_log_file(filename)
 
-    if not lines:
-        print("Log file is empty.")
-        return
-    
-    
-    info_count, warning_count, error_count, warning_lines, error_lines , unknown_lines = analyze_logs(lines)
+        if lines is None:
+            continue
+
+        if not lines:
+            print("Log file is empty.")
+            continue
+
+        break
+
+        
+    info_count, warning_count, error_count, warning_lines, error_lines, unknown_lines = analyze_logs(lines)
 
     show_summary(info_count, warning_count, error_count, len(unknown_lines))
     show_warnings(warning_lines)
