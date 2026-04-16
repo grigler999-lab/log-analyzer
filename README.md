@@ -17,6 +17,29 @@ Programmet identifierar:
 3. Loggen analyseras  
 4. Resultatet visas i terminalen  
 
+## Exempel på körning
+
+```bash
+python main.py
+Enter the log file name: sample.log
+Log summary:
+INFO: 3
+WARNING: 2
+ERROR: 2
+UNKNOWN: 1
+
+Warning lines:
+WARNING Disk space low
+WARNING High memory usage
+
+Error lines:
+ERROR Connection failed
+ERROR Timeout
+
+Unknown lines:
+SYSTEM Restart scheduled
+
+---
 ## Krav
 - Python 3.x
 

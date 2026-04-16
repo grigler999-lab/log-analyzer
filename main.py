@@ -1,4 +1,3 @@
-from copy import error
 from file_reader import read_log_file
 from log_analyzer import analyze_logs
 from output import show_summary, show_errors, show_warnings, show_unknown
